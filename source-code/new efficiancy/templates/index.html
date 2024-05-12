@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map Test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffcc80;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 600px; /* Adjusted height for a larger map */
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden; /* Ensures rounded corners display correctly */
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #f57c00;
+        }
+
+        #coordinates {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Solar Panel Efficiency Calculator</h1>
+    </header>
+    <div class="container">
+        <div id="map"></div>
+        <form action="/calculate_efficiency" method="post">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <button type="submit">Calculate Efficiency</button>
+        </form>
+        <div id="coordinates"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([19.16592425362802, 72.87780761718751], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var marker = L.marker([19.16592425362802, 72.87780761718751], {draggable: true}).addTo(map);
+        marker.on('dragend', function(event) {
+            var position = marker.getLatLng();
+            document.getElementById('coordinates').innerHTML = "Latitude: " + position.lat.toFixed(2) + "  Longitude: " + position.lng.toFixed(2); // Display coordinates rounded to 2 decimal places
+            document.getElementById('latitude').value = position.lat.toFixed(2);
+            document.getElementById('longitude').value = position.lng.toFixed(2);
+        });
+    </script>
+</body>
+</html>

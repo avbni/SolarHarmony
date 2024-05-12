@@ -1,0 +1,110 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Calculator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Solar Calculator</h1>
+  <div class="container">
+
+    <label for="option">Choose an Option:</label>
+    <select id="option" onchange="showInput()">
+      <option value="">Select Option</option>
+      <option value="1">Total Rooftop Area</option>
+       <option value="2">Solar Panel Capacity</option>
+      <option value="2">Budget</option>
+    </select> 
+    
+     <div id="sliderContainer" class="hidden">
+      <label for="sliderValue">Selected Value:</label>  
+      <input type="number" id="sliderValue" min="0" step="1" value="0">
+      <input type="range" id="slider" min="0" max="100" step="1" value="0">
+    </div>
+
+
+    <div id="inputContainer"></div>
+    <label for="category">Select Category:</label>
+    <select id="category" onchange="showFlatsInput()">
+      <option value="individual">Individual</option>
+      <option value="apartment">Apartment Building</option>
+    </select>
+    
+    <div id="flatsInput"></div>
+
+    <label for="roofarea">Available Rooftop Area (sqft.):</label>
+    <input type="number" id="roofarea" min="0" max="50000" step="10" value="0">
+    <input type="range" id="roofareaslider" min="0" max="50000" step="10" value="0">
+
+    <label for="budget">Total Budget (Rs.):</label>
+    <input type="number" id="budget" min="0" max="5000000" step="1000" value="0">
+    <input type="range" id="budgetslider" min="0" max="5000000" step="1000" value="0">
+
+    <label for="unitsconsumed">Units Consumed Per Month (kWh):</label>
+    <input type="number" id="unitsconsumed" min="0" max="10000" step="10" value="0">
+    <input type="range" id="unitsconsumedslider" min="0" max="10000" step="10" value="0">
+
+    <label for="electricityCost">Average Electricty Cost (Rs./kWh):</label>
+    <input type="number" id="electricityCost" min="0" max="50" step="1" value="0">
+    <input type="range" id="electricityCostSlider" min="0" max="50" step="1" value="0">
+
+    <button id="calculateBtn" onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="report.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Calculator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Solar Calculator</h1>
+    <div class="option-container">
+      <label for="category">Select Category:</label>
+      <select id="category" onchange="showFlatsInput()">
+        <option value="individual">Individual</option>
+        <option value="apartment">Apartment Building</option>
+      </select>
+    </div>
+    <div id="flatsInput"></div>
+    <div class="input-group">
+      <label for="roofarea">Available Rooftop Area (sqft.):</label>
+      <input type="number" id="roofarea" min="0" max="50000" step="10" value="0">
+      <input type="range" id="roofareaslider" min="0" max="50000" step="10" value="0">
+    </div>
+    <div class="input-group">
+      <label for="budget">Total Budget (Rs.):</label>
+      <input type="number" id="budget" min="0" max="5000000" step="1000" value="0">
+      <input type="range" id="budgetslider" min="0" max="5000000" step="1000" value="0">
+    </div>
+    <div class="input-group">
+      <label for="unitsconsumed">Units Consumed Per Month (kWh):</label>
+      <input type="number" id="unitsconsumed" min="0" max="10000" step="10" value="0">
+      <input type="range" id="unitsconsumedslider" min="0" max="10000" step="10" value="0">
+    </div>
+    <div class="input-group">
+      <label for="electricityCost">Average Electricity Cost (Rs./kWh):</label>
+      <input type="number" id="electricityCost" min="0" max="50" step="1" value="0">
+      <input type="range" id="electricityCostSlider" min="0" max="50" step="1" value="0">
+    </div>
+    <button id="calculateBtn" onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+  </div>
+  <div>
+    <a href="C:\Users\Swapnil\Pictures\Swapnil\KJ Somaiya TY\MIni Project (Sem-6)\FINAL\source-code\Index.html"><button>Go to Home</button></a>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>

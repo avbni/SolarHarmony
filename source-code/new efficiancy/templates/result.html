@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #fef3d4; /* Peach background */
+        }
+        h1 {
+            color: #e59400; /* Yellow heading color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            margin: 0 auto; /* Center align the chart container */
+            width: 80%; /* Set a width to control the chart container size */
+            border: 1px solid #f2e0a4; /* Light peach border */
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff; /* White background */
+        }
+        .panel-tile {
+            text-align: center;
+            background-color: #f2e0a4; /* Light peach background */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .theme-button {
+        background-color: #e59400; /* Yellow button background color */
+        color: #fef3d4; /* Peach text color */
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .theme-button:hover {
+        background-color: #ffa500; /* Darker yellow on hover */
+    }
+    
+    </style>
+</head>
+<body>
+    <h1>Efficiency Results</h1>
+
+    <!-- Display combined average efficiency -->
+    <div class="panel-tile">
+        Optimal panel tilt: <span style="font-weight: bold;">{{ panel_tilt }} degrees</span>
+        <br>
+        <button onclick="redirectToAnotherPage()" class="theme-button">Cost-Calculator</button>
+    </div>
+
+    <!-- Create an interactive line chart for monthly average efficiency -->
+    {% for panel_type, monthly_data in monthly_avg_efficiency.items() %}
+    <div class="chart-container">
+        <div id="{{ panel_type }}_graph"></div>
+    </div>
+    <script>
+        // Map month numbers to month names
+        var monthNames = {
+            1: 'Jan',
+            2: 'Feb',
+            3: 'Mar',
+            4: 'Apr',
+            5: 'May',
+            6: 'Jun',
+            7: 'Jul',
+            8: 'Aug',
+            9: 'Sep',
+            10: 'Oct',
+            11: 'Nov',
+            12: 'Dec'
+        };
+
+        // Extract x and y values for plotting
+        var monthlyData = {{ monthly_data | tojson }};
+        var months = Object.keys(monthlyData);
+        var monthLabels = months.map(month => monthNames[parseInt(month)]);
+        var efficiencies = Object.values(monthlyData);
+        
+        // Create trace for the current panel type
+        var trace = {
+            x: monthLabels,
+            y: efficiencies,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: {color: 'green'},
+            line: {shape: 'spline'},
+            name: '{{ panel_type }}'
+        };
+        
+        // Define layout for the graph
+        var layout = {
+            title: 'Monthly Average Efficiency for {{ panel_type }}',
+            xaxis: {title: 'Month' },
+            yaxis: {title: 'Average Efficiency (%)'}
+        };
+
+        // Plot the graph for the current panel type
+        Plotly.newPlot('{{ panel_type }}_graph', [trace], layout);
+
+        function redirectToAnotherPage() {
+        // Replace 'local_page.html' with the relative path to your locally stored webpage
+        window.location.href = '/calculator';
+    }
+    </script>
+    {% endfor %}
+
+    
+</body>
+</html>
